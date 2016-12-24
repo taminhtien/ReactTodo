@@ -5,7 +5,7 @@ module.exports = {
   entry: [
     'script!jquery/dist/jquery.min.js', // Those are script files so we will let script loader to load, no need webpack to handle it
     'script!foundation-sites/dist/js/foundation.min.js',
-    './app/app.jsx',
+    './app/app.js',
   ],
   externals: { // Set of key-value pair, key is module name and value is a variable we want to available when loading script files in entry
     jquery: 'jQuery' 
@@ -23,6 +23,10 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
+    modulesDirectories: [
+      'node_modules',
+      './app/components'
+    ],
     alias: {
       applicationStyles: 'app/styles/app.scss'
     },
