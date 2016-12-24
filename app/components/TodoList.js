@@ -3,13 +3,13 @@ import Todo from 'Todo'
 
 class TodoList extends React.Component {
   render() {
-    const { todos } = this.props
+    const { todos, showCompleted } = this.props
 
     return (
       <div>
         {
           todos.map((todo) => {
-            return <Todo key={todo.id} {...todo}/>
+            return showCompleted === todo.completed && <Todo key={todo.id} {...todo}/>
           })
         }
       </div>
