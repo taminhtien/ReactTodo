@@ -12,10 +12,10 @@ module.exports = (config) => {
     files: [
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/foundation-sites/dist/js/foundation.min.js',
-      'app/tests/**/*.test.jsx'
+      'app/tests/**/*.test.js'
     ], // Which files to test
     preprocessors: {
-      'app/tests/**/*.test.jsx': ['webpack', 'sourcemap'] // Run these before process test files
+      'app/tests/**/*.test.js': ['webpack', 'sourcemap'] // Run these before process test files
     },
     reporters: ['mocha'], // Clean up the output
     client: { // Send the details down to individual frameworks
