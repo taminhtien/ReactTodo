@@ -1,4 +1,5 @@
 import React from 'react'
+import TodoAPI from 'TodoApi'
 import uuid from 'node-uuid'
 import TodoList from 'TodoList'
 import AddTodo from 'AddTodo'
@@ -11,24 +12,12 @@ class TodoApp extends React.Component {
     this.state = {
       showCompleted: false,
       searchText: '',
-      todos: [
-        {
-          id: uuid(),
-          text: 'Walk the dog',
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: 'Clean the yard',
-          completed: false
-        },
-        {
-          id: uuid(),
-          text: 'Coding',
-          completed: false
-        }
-      ]
+      todos: TodoAPI.getTodos()
     }
+  }
+
+  componentDidUpdate() {
+    TodoAPI.setTodos(this.state.todos)
   }
 
   handleAddTodo(text) {
@@ -69,7 +58,7 @@ class TodoApp extends React.Component {
     return (
       <div>
         <TodoSearch onSearch={(showCompleted, searchText) => {this.handleSearch(showCompleted, searchText) }}/>
-        <TodoList todos={todos} showCompleted={showCompleted} onToggle={(id) => { this.handleToggle(id) }}/>
+        { todos && <TodoList todos={todos} showCompleted={showCompleted} onToggle={(id) => { this.handleToggle(id) }}/> }
         <AddTodo onAddTodo={(text) => this.handleAddTodo(text)}/>
       </div>
     )
