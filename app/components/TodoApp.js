@@ -51,13 +51,25 @@ class TodoApp extends React.Component {
     })
   }
 
+  handleToggle(id) {
+    const updatedTodos = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed
+      }
+
+      return todo
+    })
+
+    this.setState({todos: updatedTodos})
+  }
+
   render() {
     const { todos, showCompleted } = this.state
 
     return (
       <div>
         <TodoSearch onSearch={(showCompleted, searchText) => {this.handleSearch(showCompleted, searchText) }}/>
-        <TodoList todos={todos} showCompleted={showCompleted}/>
+        <TodoList todos={todos} showCompleted={showCompleted} onToggle={(id) => { this.handleToggle(id) }}/>
         <AddTodo onAddTodo={(text) => this.handleAddTodo(text)}/>
       </div>
     )
