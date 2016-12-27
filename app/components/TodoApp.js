@@ -53,12 +53,13 @@ class TodoApp extends React.Component {
   }
 
   render() {
-    const { todos, showCompleted } = this.state
+    const { todos, showCompleted, searchText } = this.state
+    const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText)
 
     return (
       <div>
         <TodoSearch onSearch={(showCompleted, searchText) => {this.handleSearch(showCompleted, searchText) }}/>
-        { todos && <TodoList todos={todos} showCompleted={showCompleted} onToggle={(id) => { this.handleToggle(id) }}/> }
+        <TodoList todos={filteredTodos} showCompleted={showCompleted} onToggle={(id) => { this.handleToggle(id) }}/>
         <AddTodo onAddTodo={(text) => this.handleAddTodo(text)}/>
       </div>
     )
