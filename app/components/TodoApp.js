@@ -30,6 +30,7 @@ class TodoApp extends React.Component {
           text: text,
           completed: false,
           createdAt: moment().unix(),
+          completedAt: undefined
         }
       ]
     })
