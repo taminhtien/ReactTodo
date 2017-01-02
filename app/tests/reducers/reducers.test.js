@@ -28,7 +28,7 @@ describe('Reducers', () => {
     })
   })
 
-  describe('todoReducer', () => {
+  describe('todosReducer', () => {
     it('should add new todo', () => {
       const action = {
         type: 'ADD_TODO',
@@ -55,7 +55,7 @@ describe('Reducers', () => {
         id: 1
       }
 
-      const res = reducers.todoReducer(df(todos), df(action))
+      const res = reducers.todosReducer(df(todos), df(action))
 
       expect(res[0].completed).toEqual(true)
     })

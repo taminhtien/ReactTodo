@@ -1,7 +1,7 @@
 import uuid from 'node-uuid'
 import moment from 'moment'
 
-const searchTextReducer = (state = '', action) => {
+export const searchTextReducer = (state = '', action) => {
   switch (action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText
@@ -10,7 +10,7 @@ const searchTextReducer = (state = '', action) => {
   }
 }
 
-const showCompletedReducer = (state = false, action) => {
+export const showCompletedReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state
@@ -19,7 +19,7 @@ const showCompletedReducer = (state = false, action) => {
   }
 }
 
-const todoReducer = (state = [], action) => {
+export const todosReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_TODO':
       return [
@@ -47,5 +47,3 @@ const todoReducer = (state = [], action) => {
       return state
   }
 }
-
-export default { searchTextReducer, showCompletedReducer, todoReducer }
