@@ -1,23 +1,31 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Todo from 'Todo'
 
-class TodoList extends React.Component {
-  renderTodos(todos, onToggle) {
+// Export pure React class
+export class TodoList extends React.Component {
+  renderTodos() {
+    const { todos } = this.props
     if (todos.length === 0) {
       return <p className='container__message'>Nothing To Do</p>
     } else {
-      return todos.map((todo) => <Todo key={todo.id} {...todo} onToggle={onToggle}/>)
+      return todos.map((todo) => <Todo key={todo.id} {...todo}/>)
     }
   }
   render() {
-    const { todos, onToggle } = this.props
-
     return (
       <div>
-        {this.renderTodos(todos, onToggle)}
+        {this.renderTodos()}
       </div>
     )
   }
 }
 
-export default TodoList
+// Redux version, look similiar but expect store is exist in component
+export default connect(
+  (state) => {
+    return {
+      todos: state.todos
+    }
+  }
+)(TodoList)
