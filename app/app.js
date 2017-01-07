@@ -7,15 +7,9 @@ import actions from 'actions'
 
 const store = require('configureStore').configure()
 
-console.log(actions)
-
 store.subscribe(() => {
   console.log('New state', store.getState())
 })
-
-store.dispatch(actions.addTodo('Clean the yard'))
-store.dispatch(actions.setSearchText('yard'))
-store.dispatch(actions.toggleShowCompleted())
 
 $(document).foundation()
 
