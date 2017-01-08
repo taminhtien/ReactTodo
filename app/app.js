@@ -8,14 +8,7 @@ import TodoAPI from 'TodoAPI'
 
 const store = require('configureStore').configure()
 
-store.subscribe(() => {
-  const state = store.getState()
-  console.log('New state', state)
-  TodoAPI.setTodos(state.todos)
-})
-
-const initialTodos = TodoAPI.getTodos()
-store.dispatch(actions.addTodos(initialTodos))
+store.dispatch(actions.startAddTodos())
 
 $(document).foundation()
 

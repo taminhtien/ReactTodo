@@ -48,6 +48,28 @@ export const addTodos = (todos) => {
   }
 }
 
+export const startAddTodos = () => {
+  return (dispatch, getState) => {
+    const todoRef = firebaseRef.child('todos').once('value')
+
+    return todoRef.then((snapshot) => {
+      if (snapshot.val() === null) {
+        dispatch(addTodos([]))
+      } else {
+        const todos = snapshot.val()
+
+        const arrayTodos = Object.keys(todos).map((todo) => {
+          return {
+            ...todos[todo],
+              id: todo
+          }
+        })
+
+        dispatch(addTodos(arrayTodos))
+      }
+    })
+  }
+}
 export const updateTodo = (id, updates) => {
   return {
     type: 'UPDATE_TODO',

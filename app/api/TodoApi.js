@@ -1,24 +1,5 @@
 import $ from 'jquery'
 
-const setTodos = (todos) => {
-  if ($.isArray(todos)) {
-    localStorage.setItem('todos', JSON.stringify(todos))
-    return todos
-  }
-}
-
-const getTodos = () => {
-  const stringTodos = localStorage.getItem('todos')
-  let todos = []
-
-  try {
-    todos = JSON.parse(stringTodos)
-  } catch(e) {
-  }
-
-  return $.isArray(todos) ? todos : []
-}
-
 const filterTodos = (todos, showCompleted, searchText) => {
   var filteredTodos = todos
 
@@ -29,4 +10,4 @@ const filterTodos = (todos, showCompleted, searchText) => {
   return filteredTodos
 }
 
-export default { setTodos, getTodos, filterTodos }
+export default { filterTodos }

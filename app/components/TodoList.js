@@ -7,10 +7,12 @@ import TodoAPI from 'TodoAPI'
 export class TodoList extends React.Component {
   renderTodos() {
     const { todos, showCompleted, searchText } = this.props
-    if (todos.length === 0) {
+    const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText)
+
+    if (filteredTodos.length === 0) {
       return <p className='container__message'>Nothing To Do</p>
     } else {
-      return TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} {...todo}/>)
+      return filteredTodos.map((todo) => <Todo key={todo.id} {...todo}/>)
     }
   }
   render() {
