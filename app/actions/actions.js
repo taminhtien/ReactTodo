@@ -30,7 +30,8 @@ export const startAddTodo = (text) => {
       completedAt: null
     }
 
-    const todoRef = firebaseRef.child('todos').push(todo)
+    const userID = getState().auth.uid
+    const todoRef = firebaseRef.child(`users/${userID}/todos`).push(todo)
 
     return todoRef.then(() => {
       dispatch(addTodo({
@@ -50,7 +51,8 @@ export const addTodos = (todos) => {
 
 export const startAddTodos = () => {
   return (dispatch, getState) => {
-    const todoRef = firebaseRef.child('todos').once('value')
+    const userID = getState().auth.uid
+    const todoRef = firebaseRef.child(`users/${userID}/todos`).once('value')
 
     return todoRef.then((snapshot) => {
       if (snapshot.val() === null) {
@@ -80,7 +82,8 @@ export const updateTodo = (id, updates) => {
 
 export const startToggleTodo = (id, completed) => {
   return (dispatch, getState) => {
-    const todoRef = firebaseRef.child(`todos/${id}`)
+    const userID = getState().auth.uid
+    const todoRef = firebaseRef.child(`users/${userID}/todos/${id}`)
 
     const updates = {
       completed,
@@ -108,5 +111,18 @@ export const startLogout = () => {
     return firebase.auth().signOut().then(() => {
       console.log('Logged out')
     })
+  }
+}
+
+export const login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  }
+}
+
+export const logout = (uid) => {
+  return {
+    type: 'LOGOUT'
   }
 }
